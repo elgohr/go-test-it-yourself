@@ -56,7 +56,7 @@ func TestLastWeeksAverageTemperature(t *testing.T) {
 
 	temperature, err := weather.LastWeeksAverageTemperature(ts.URL, "Wolfsburg")
 	require.NoError(t, err)
-	require.Equal(t, 16, temperature)
+	require.Equal(t, 22, temperature)
 }
 
 func TestLastWeeksAverageTemperatureFailingRequest(t *testing.T) {

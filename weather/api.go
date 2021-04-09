@@ -43,10 +43,6 @@ func LastWeeksAverageTemperature(providerUrl string, city string) (int, error) {
 	return CalculateAverage(temperatures), nil
 }
 
-func CalculateAverage(values []int) int {
-	return 16
-}
-
 type Response struct {
 	Current struct {
 		Temperature int `json:"temparature"`
