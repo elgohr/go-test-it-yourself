@@ -1,0 +1,40 @@
+{
+  "request": {
+    "type": "City",
+    "query": "Wolfsburg, Germany",
+    "language": "en",
+    "unit": "m"
+  },
+  "location": {
+    "name": "Wolfsburg",
+    "country": "Germany",
+    "region": "Lower Saxony",
+    "lat": "37.775",
+    "lon": "-122.418",
+    "timezone_id": "Europe/Berlin",
+    "localtime": "2021-04-20 17:00",
+    "localtime_epoch": 1567488900,
+    "utc_offset": "-7.0"
+  },
+  "current": {
+    "observation_time": "12:35 PM",
+    "temparature": 16,
+    "weather_code": 122,
+    "weather_icons": [
+      "https://assets.weatherstack.com/images/symbol.png"
+    ],
+    "weather_descriptions": [
+      "Overcast"
+    ],
+    "wind_speed": 17,
+    "wind_degree": 260,
+    "wind_dir": "W",
+    "pressure": 1016,
+    "precip": 0,
+    "humidity": 87,
+    "cloudcover": 100,
+    "feelslike": 16,
+    "uv_index": 0,
+    "visibility": 16
+  }
+}
