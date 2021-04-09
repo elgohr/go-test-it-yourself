@@ -42,3 +42,36 @@ func TestCurrentTemperatureFailingDecode(t *testing.T) {
 	require.EqualError(t, err, "could not decode weather")
 	require.Equal(t, -90, temperature)
 }
+
+func TestLastWeeksAverageTemperature(t *testing.T) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "/historical", r.URL.Path)
+		require.Equal(t, "Wolfsburg", r.URL.Query().Get("query"))
+
+		testContent, err := ioutil.ReadFile("testdata/history.json")
+		require.NoError(t, err)
+		w.Write(testContent)
+	}))
+	defer ts.Close()
+
+	temperature, err := weather.LastWeeksAverageTemperature(ts.URL, "Wolfsburg")
+	require.NoError(t, err)
+	require.Equal(t, 16, temperature)
+}
+
+func TestLastWeeksAverageTemperatureFailingRequest(t *testing.T) {
+	temperature, err := weather.LastWeeksAverageTemperature("http://localhost/nothing_here", "Wolfsburg")
+	require.EqualError(t, err, "could not contact api")
+	require.Equal(t, -90, temperature)
+}
+
+func TestLastWeeksAverageTemperatureFailingDecode(t *testing.T) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("I'm serving everything but the weather"))
+	}))
+	defer ts.Close()
+
+	temperature, err := weather.CurrentTemperature(ts.URL, "Wolfsburg")
+	require.EqualError(t, err, "could not decode weather")
+	require.Equal(t, -90, temperature)
+}
